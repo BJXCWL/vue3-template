@@ -21,9 +21,8 @@ export const useUserStore = defineStore('user', () => {
     } 
   }
   async function getLoginUser(){
-    try {
-      // 获取登录用户接口
-      const res = await UserControllerService.getLoginUser();
+    // 获取登录用户接口
+    const res = await UserControllerService.getLoginUser();
     if(res.code===0){
       console.log("登录信息：{}",res)
       user.value = {
@@ -31,10 +30,7 @@ export const useUserStore = defineStore('user', () => {
         avater: res.data.avater
       }
     }
-    }catch (error) {
-      console.error('Error fetching login user:', error);
-    }
-    
+        
     }
   return { user, login , getLoginUser}
 })
