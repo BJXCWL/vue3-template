@@ -2,7 +2,7 @@
     <el-header class="app-header">
       <div class="header-content">
         <div class="logo-container" @click="goHome">
-          <img :src="logoSrc" alt="Logo" class="logo" />
+          <img :src="user?.avater ? user?.avater:logoSrc" alt="Logo" class="logo" />
         </div>
   
         <el-menu
@@ -23,7 +23,10 @@
         <div class="avatar-container">
           <el-dropdown>
             <span class="el-dropdown-link">
+              <el-space>
               <el-avatar :src="userAvatar" />
+              <p>{{user?.name ? user.name : "未登录"}}</p>
+            </el-space>
             </span>
             <template #dropdown>
               <el-dropdown-menu>
@@ -32,20 +35,26 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
+          
+        
+     
         </div>
       </div>
     </el-header>
   </template>
   
   <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed,ref } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import type { Router, RouteRecordRaw } from 'vue-router'
-  
+  import logoSrc from '@/assets/logo.png'
+  import { useUserStore } from '@/stores/user'
   const router: Router = useRouter()
   const route = useRoute()
   
-  import logoSrc from '@/assets/logo.png'
+  const userStore = useUserStore()
+
+  const user = computed(() => userStore.user)
   
   function goHome() {
     router.push('/')
@@ -119,6 +128,10 @@
   }
   .el-dropdown-link {
     cursor: pointer;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
   }
   </style>
   

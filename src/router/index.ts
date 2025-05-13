@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Login from '@/views/login/Login.vue'
 import Register from '@/views/login/Register.vue'
 import Forget from '@/views/login/Forget.vue'
+import UserProfile from '@/views/user/UserProfile.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,6 +48,15 @@ const router = createRouter({
           component: Forget,
           meta: {
             title:'忘记密码',
+            hideMenu: true,
+          }
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          component: UserProfile,
+          meta: {
+            title:'个人资料',
             hideMenu: true,
           }
         },
